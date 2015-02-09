@@ -15,7 +15,7 @@ __all__ = ["fig_to_html", "fig_to_dict", "fig_to_d3",
            "display_d3", "display",
            "show_d3", "show",
            "enable_notebook", "disable_notebook",
-           "save_html", "save_json"]
+           "save_html", "save_json", "fig_to_json"]
 
 
 # Simple HTML template. This works in standalone web pages for single figures,
@@ -481,6 +481,8 @@ def save_json(fig, fileobj, **kwargs):
         raise ValueError("fileobj should be a filename or a writable file")
     json.dump(fig_to_dict(fig, **kwargs), fileobj)
 
+def fig_to_json(fig):
+    return json.dumps(fig_to_dict(fig), cls=NumpyEncoder)
 
 # Deprecated versions of these functions
 show_d3 = deprecated(show, "mpld3.show_d3", "mpld3.show")
